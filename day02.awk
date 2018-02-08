@@ -3,21 +3,20 @@ BEGIN {
   total_length = 0;
 }
 {
-  side1 = $1 * $2
-  side2 = $1 * $3
-  side3 = $2 * $3
-  total_area += side1 * 2 + side2 * 2 + side3 * 2
-  total_length += $1 * $2 * $3
-  if(side1 <= side2 && side1 <= side3) {
-    total_area += side1
-    total_length += $1 * 2 + $2 * 2
-  } else if(side2 <= side3) {
-    total_area += side2
-    total_length += $1 * 2 + $3 * 2
-  } else {
-    total_area += side3
-    total_length += $2 * 2 + $3 * 2
-  }
+  split($1, dims, "x")
+  asort(dims)
+  side1 = dims[1] * dims[2] # Guaranteed to be smallest because of asort
+  side2 = dims[1] * dims[3]
+  side3 = dims[2] * dims[3]
+
+  # Add each of the six sides, smallest side one extra time
+  total_area += side1 * 3 + side2 * 2 + side3 * 2
+  # Add smalles
+
+  # Add volume
+  total_length += dims[1] * dims[2] * dims[3]
+  # Add circumference of smallest side
+  total_length += dims[1] * 2 + dims[2] * 2
 }
 END {
   printf "Part1: %i", total_area
