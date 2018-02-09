@@ -11,7 +11,6 @@ BEGIN {
 
   # Add each of the six sides, smallest side one extra time
   total_area += side1 * 3 + side2 * 2 + side3 * 2
-  # Add smalles
 
   # Add volume
   total_length += dims[1] * dims[2] * dims[3]
