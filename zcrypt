@@ -29,20 +29,23 @@ Node's crypto module is used:  https://nodejs.org/api/cyrpto.html
 `
 
 let input = []
-let algo = 'md5'
+let algo = 'sha256'
 let digest = 'hex'
 let encoding = 'utf8'
 let showInput = false
 for(let i = 2; i < process.argv.length; i += 1) {
   const arg = process.argv[i]
-  const cmd = process.argv[i - 1]
+  const cmd = input[input.length - 1]
 
   if(cmd === '-a' || cmd === '--algo') {
     algo = arg
+    input.pop()
   } else if(cmd === '-d' || cmd === '--digest') {
     digest = arg
+    input.pop()
   } else if(cmd === '-e' || cmd === '--encoding') {
     encoding = arg
+    input.pop()
   } else if(arg === '-h' || arg === '--help') {
     console.log(man.trim())
     return process.exit(0)
