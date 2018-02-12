@@ -1,3 +1,4 @@
+#!/usr/bin/awk -f
 BEGIN {
   print "{$1 = sprintf(\"%1000s\\n\", \"\")}"
   print "{gsub(/ /, \"x\")}"

@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-cat input02.txt | awk -f day02.awk
+cat input02.txt | sed -e 's/x/\t/g' | ./day02.awk

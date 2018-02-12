@@ -1,3 +1,4 @@
+#!/usr/bin/awk -f
 BEGIN {
   x = 0
   y = 0

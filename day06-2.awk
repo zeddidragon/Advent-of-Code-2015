@@ -1,3 +1,4 @@
+#!/usr/bin/awk -f
 BEGIN {
   print "{$1 = sprintf(\"%1000s\\n\", \"\")}"
   print "{gsub(/ /, \"x\t\")}"
@@ -6,9 +7,9 @@ BEGIN {
   header = sprintf("NR > %i && NR <= %i", $3, $5 + 1)
   loop = sprintf("i = %i; i <= %i; i++", $2 + 1, $4 + 1)
   if($1 == "on") {
-    body = "sub(//, \"I\", $i)"
+    body = "$i = $i \"I\""
   } else if($1 == "toggle") {
-    body = "sub(//, \"II\", $i)"
+    body = "$i = $i \"II\""
   } else {
     body = "sub(/I/, \"\", $i)"
   }

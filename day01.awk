@@ -1,3 +1,4 @@
+#!/usr/bin/awk -f
 BEGIN {
   depth = 0
   n = 0
