@@ -1,20 +1,19 @@
 #!/usr/bin/env bash
-echo -n "Part 1:"
-yes \
-  | awk -f <(
-    cat input06.txt \
-      | sed -e 's/turn //' -e 's/,/ /g' -e 's/through //' \
-      | ./day06.awk
-  ) \
-  | grep -o O \
-  | wc -l
 
-echo -n "Part 2:"
-yes \
-  | awk -f <(
-    cat input06.txt \
-      | sed -e 's/turn //' -e 's/,/ /g' -e 's/through //' \
-      | ./day06-2.awk
+cat input06.txt \
+  | sed -e 's/turn //' -e 's/,/ /g' -e 's/through //' \
+  | ./day06.awk -v part=1 \
+  | ./grid.bc \
+  | (
+    read answer
+    echo "Part 1: $answer"
   ) \
-  | grep -o I \
-  | wc -l
+& \
+cat input06.txt \
+  | sed -e 's/turn //' -e 's/,/ /g' -e 's/through //' \
+  | ./day06.awk -v part=2 \
+  | ./grid.bc \
+  | (
+    read answer
+    echo "Part 2: $answer"
+  )

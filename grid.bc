@@ -1,0 +1,40 @@
+#!/usr/bin/env bc
+width = 1000
+height = 1000
+
+define set(x1, y1, x2, y2, val) {
+  for(j = y1; j <= y2; ++j) {
+    for(i = x1; i <= x2; ++i) {
+      index = j * width + i
+      grid[index] = val
+    }
+  }
+}
+
+define toggle(x1, y1, x2, y2) {
+  for(j = y1; j <= y2; ++j) {
+    for(i = x1; i <= x2; ++i) {
+      index = j * width + i
+      grid[index] = 1 - grid[index]
+    }
+  }
+}
+
+define add(x1, y1, x2, y2, val) {
+  for(j = y1; j <= y2; ++j) {
+    for(i = x1; i <= x2; ++i) {
+      index = j * width + i
+      new = (grid[index] += val)
+      if(new < 0) grid[index] = 0
+    }
+  }
+}
+
+define sum() {
+  len = width * height
+  ret = 0
+  for(i = 0; i < len; ++i) {
+    ret += grid[i]
+  }
+  return ret
+}
