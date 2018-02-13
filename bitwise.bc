@@ -21,10 +21,10 @@ define bitor(a, b) {
   return bitnot(bitand(bitnot(a), bitnot(b)))
 }
 
-define lshift(a, b) {
+define bitlshift(a, b) {
   return a * (2 ^ b)
 }
 
-define rshift(a, b) {
+define bitrshift(a, b) {
   return a / (2 ^ b)
 }
