@@ -37,9 +37,9 @@ function resolve(dep) {
     split(key, keys, SUBSEP)
     if(keys[1] != dep) continue
     var = keys[2]
-    if(is_resolved(var) && (var in pending) && (pending[var] != 0)) {
+    if((var in pending) && is_resolved(var)) {
       print pending[var]
-      pending[var] = 0
+      delete pending[var]
       resolve(var)
     }
   }
