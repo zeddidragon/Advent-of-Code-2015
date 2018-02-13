@@ -13,7 +13,26 @@
   }
 }
 END {
-  print "print lx"
+  print "print a"
+}
+
+function printdeps() {
+  print "Dependencies:"
+  for(var in dependencies) {
+    printf "%s:", var
+    for(dep in dependencies[var]) {
+      printf " %s", dep
+    }
+    print ""
+  }
+  print "To trigger:"
+  for(key in notify) {
+    printf "%s: ", key
+    for(dep in notify[key]) {
+      printf " %s", dep
+    }
+    print ""
+  }
 }
 
 function depend(var, dep, i) {
@@ -35,7 +54,7 @@ function is_resolved(var) {
 function resolve(dep) {
   resolved[dep] = 1
   if(!(dep in notify)) return
-  for(var in notify) {
+  for(var in notify[dep]) {
     if(is_resolved(var) && (var in pending) && (pending[var] != 0)) {
       print pending[var]
       pending[var] = 0
