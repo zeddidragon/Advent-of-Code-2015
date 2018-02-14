@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 assemble() {
-  cat - \
-    | tr A-Z a-z \
+  tr A-Z a-z \
     | sed -e 's/\bif\b/biff/' -e ''\
     | ./day07.awk \
     | ./bitwise.bc
