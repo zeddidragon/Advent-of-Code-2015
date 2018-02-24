@@ -1,0 +1,63 @@
+#!/usr/bin/env bc
+
+define step() {
+  for(j = 0; j < height; ++j) {
+    for(i = 0; i < width; ++i) {
+      index = j * width + i
+      neighbours[index] = 0
+    }
+  }
+
+  for(j = 0; j < height; ++j) {
+    for(i = 0; i < width; ++i) {
+      index = j * width + i
+      if(!grid[index]) continue
+      if(i > 0 && j > 0) neighbours[index - height - 1] += 1
+      if(j > 0) neighbours[index - height] += 1
+      if(i < width - 1 && j > 0) neighbours[index - height + 1] += 1
+      if(i > 0) neighbours[index - 1] += 1
+      if(i < width - 1) neighbours[index + 1] += 1
+      if(i > 0 && j < height - 1) neighbours[index + height - 1] += 1
+      if(j < height - 1) neighbours[index + height] += 1
+      if(i < width - 1 && j < height - 1) neighbours[index + height + 1] += 1
+    }
+  }
+
+  for(j = 0; j < height; ++j) {
+    for(i = 0; i < width; ++i) {
+      index = j * width + i
+      state = grid[index]
+      ns = neighbours[index]
+      if(state == 1 && ns != 2 && ns != 3) {
+        grid[index] = 0
+      } else if(state == 0 && ns == 3) {
+        grid[index] = 1
+      }
+    }
+  }
+
+  if(corners) {
+    grid[0] = 1
+    grid[width - 1] = 1
+    grid[width * (height - 1)] = 1
+    grid[width * height - 1] = 1
+  }
+}
+
+define count() {
+  sum = 0
+  for(j = 0; j < height; ++j) {
+    for(i = 0; i < width; ++i) {
+      index = j * width + i
+      sum += grid[index]
+    }
+  }
+  return sum
+}
+
+define run(n) {
+  for(k = 0; k < n; ++k) {
+    q = step()
+  }
+  return count()
+}
