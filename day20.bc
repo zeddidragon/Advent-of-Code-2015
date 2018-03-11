@@ -1,0 +1,23 @@
+#!/usr/bin/env bc
+
+define step(house) {
+  sum = 0
+  root = sqrt(house)
+  for(i = 1; i <= root; ++i) {
+    if(house % i) continue
+    if(!limit || i * limit > house) sum += i * factor
+    div = house / i
+    if(div == i) continue
+    if(!limit || div * limit > house) sum += div * factor
+  }
+  return sum
+}
+
+define run() {
+  while(1) {
+    sum = step(++j)
+    if(sum >= target) {
+      return j
+    }
+  }
+}
